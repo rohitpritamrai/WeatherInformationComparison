@@ -15,6 +15,9 @@ public class SearchOptionsPage {
     @FindBy(xpath = "//*[@id='dismiss-button']")
     private WebElement dismissBtn;
 
+    @FindBy(xpath = "//iframe[@id='google_ads_iframe_/6581/web/in/interstitial/admin/search_0']")
+    private WebElement adFrame;
+
     /* To initialize the WebElements and WebDriver through PageFactory using it's constructor */
     public SearchOptionsPage(WebDriver driver){
         this.driver=driver;
@@ -28,5 +31,12 @@ public class SearchOptionsPage {
         }else {
             throw new NoSuchElementException("Searched city is not present");
         }
+    }
+
+    /*This method is to to close the ad popup appears after the search */
+    public void handleAdPopUp() {
+        driver.switchTo().frame(adFrame);
+        dismissBtn.click();
+        driver.switchTo().defaultContent();
     }
 }
