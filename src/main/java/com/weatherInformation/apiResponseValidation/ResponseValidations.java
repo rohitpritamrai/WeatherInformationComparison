@@ -12,7 +12,7 @@ public class ResponseValidations {
     public void SetTemperatureValue(String temp) {
         temperature= (int) Float.parseFloat(temp.substring(0,3));
         temperature=(temperature-273);
-        System.out.println("Temperature in Kelvin "+temperature);
+        System.out.println("Temperature in degree Celcius from API :"+temperature);
     }
 
     public void ResponseValidation(Response response) {
