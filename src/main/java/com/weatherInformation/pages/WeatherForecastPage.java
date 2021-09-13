@@ -8,7 +8,7 @@ import org.openqa.selenium.support.PageFactory;
 
 public class WeatherForecastPage {
 
-    private static String temperature;
+    private static int temperature;
     WebDriver driver;
 
     @FindBy(xpath = "//div[@class='cur-con-weather-card__panel']/div/div/div[@class='temp']")
@@ -21,11 +21,15 @@ public class WeatherForecastPage {
 
     /*To fetch the temperature text visible for the searched city*/
     public void getTemperatureValue(){
-        String temperature = searchedResult.getText();
-        this.temperature = temperature;
+        if(searchedResult.isDisplayed()){
+        String temp = searchedResult.getText();
+        temperature = Integer.parseInt(temp.substring(0,2));
+        }else {
+            throw new NoSuchElementException("No Element found");
+        }
     }
 
-    public static String getTemperatureFromWebPage(){
+    public static int getTemperatureFromWebPage(){
         return temperature;
     }
 }
