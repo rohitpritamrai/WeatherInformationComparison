@@ -43,12 +43,8 @@ public class Tests extends SetUp {
     }
 
     @Test(priority = 3)
-    public void compareTemperature() {
+    public void compareTemperature() throws InvalidRangeException {
         comparator = new CompareTheTemperature();
-        try {
-            comparator.Variance();
-        } catch (InvalidRangeException e) {
-            e.printStackTrace();
-        }
+        comparator.Variance();
     }
 }
