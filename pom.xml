@@ -53,7 +53,19 @@
             <artifactId>json-schema-validator</artifactId>
             <version>4.4.0</version>
         </dependency>
-        <!-- https://mvnrepository.com/artifact/io.rest-assured/json-schema-validator -->
+        <!-- Below 2 dependencies are for ExtenReports -->
+        <!-- https://mvnrepository.com/artifact/com.aventstack/extentreports -->
+        <dependency>
+            <groupId>com.aventstack</groupId>
+            <artifactId>extentreports</artifactId>
+            <version>4.0.9</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/commons-io/commons-io -->
+        <dependency>
+            <groupId>commons-io</groupId>
+            <artifactId>commons-io</artifactId>
+            <version>2.11.0</version>
+        </dependency>
 
     </dependencies>
 
