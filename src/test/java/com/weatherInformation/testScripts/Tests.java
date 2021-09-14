@@ -1,7 +1,9 @@
 package com.weatherInformation.testScripts;
 
+import com.weatherInformation.APITests.CompareTheTemperature;
 import com.weatherInformation.APITests.HttpMethods;
 import com.weatherInformation.apiResponseValidation.ResponseValidations;
+import com.weatherInformation.customException.InvalidRangeException;
 import com.weatherInformation.pages.AccuWeatherHomePage;
 import com.weatherInformation.pages.SearchOptionsPage;
 import com.weatherInformation.pages.WeatherForecastPage;
@@ -14,8 +16,9 @@ public class Tests extends SetUp {
     AccuWeatherHomePage homepage;
     SearchOptionsPage searchOptions;
     WeatherForecastPage resultPage;
+    CompareTheTemperature comparator;
 
-    @Test
+    @Test(priority = 2)
     public void fetchTemperatureFromUiApp() {
         homepage = new AccuWeatherHomePage(getDriver());
         homepage.searchCity(properties.getProperty("CITY"));
@@ -29,7 +32,7 @@ public class Tests extends SetUp {
 
     }
 
-    @Test
+    @Test(priority = 1)
     public void fetchTemperatureFromAPI() {
         HttpMethods httpMethods=new HttpMethods(properties);
         Response response=httpMethods.GetRequest(properties.getProperty("BASE_URI"));
@@ -37,5 +40,15 @@ public class Tests extends SetUp {
         resValidation.ResponseValidation(response);
         properties.setProperty("API_TEMP",response.jsonPath().get("main.temp").toString());
         resValidation.SetTemperatureValue(properties.getProperty("API_TEMP"));
+    }
+
+    @Test(priority = 3)
+    public void compareTemperature() {
+        comparator = new CompareTheTemperature();
+        try {
+            comparator.Variance();
+        } catch (InvalidRangeException e) {
+            e.printStackTrace();
+        }
     }
 }
